@@ -1,213 +1,67 @@
-/* ------------------------------
-   Global Styles
------------------------------- */
-html {
+html, body {
+  min-height: 100vh;
   scroll-behavior: smooth;
 }
 
-body {
-  cursor: none;
-  overflow-x: hidden;
-}
-
-/* ------------------------------
-   Custom Cursor
------------------------------- */
+/* Custom Cursor */
 .cursor,
 .cursor-follower {
   position: fixed;
+  top: 0;
+  left: 0;
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out;
 }
 
 .cursor {
   width: 8px;
   height: 8px;
-  background: #84cc16; /* Lime-500 */
+  background: #84cc16;
 }
 
 .cursor-follower {
-  width: 30px;
-  height: 30px;
-  background: rgba(132, 204, 22, 0.15);
-  transition: all 0.15s ease-out;
+  width: 32px;
+  height: 32px;
+  border: 2px solid #84cc16;
+  opacity: 0.3;
 }
 
-/* Cursor Interaction Effects */
-a:hover ~ .cursor,
-button:hover ~ .cursor {
-  transform: scale(1.3);
+/* Hide custom cursor on mobile */
+@media (max-width: 768px) {
+  .cursor, .cursor-follower {
+    display: none !important;
+  }
 }
 
-/* ------------------------------
-   Animations
------------------------------- */
+/* Fade-in animations */
+.animate-fade-in {
+  animation: fadeIn 1s ease-in forwards;
+}
+
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Float animation */
+.animate-float {
+  animation: float 4s ease-in-out infinite;
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
-.animate-fade-in {
-  animation: fadeIn 1.2s ease-out forwards;
+/* Back-to-top button visibility */
+#backToTop.show {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-.animate-float {
-  animation: float 5s ease-in-out infinite;
-}
-
-/* ------------------------------
-   Navbar Hover Effects
------------------------------- */
-.nav-link {
-  position: relative;
-}
-
-.nav-link::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background: #84cc16;
-  transition: width 0.3s;
-}
-
-.nav-link:hover::after {
-  width: 100%;
-}
-
-/* ------------------------------
-   Feature Cards
------------------------------- */
-.feature-card {
-  transition: all 0.4s ease;
-}
-
-.feature-card:hover {
-  transform: translateY(-6px);
-}
-
-/* ------------------------------
-   Video Section
------------------------------- */
-.video-container {
-  position: relative;
-  cursor: pointer;
-}
-
-.play-button {
-  transition: transform 0.3s;
-}
-
-.video-container:hover .play-button {
-  transform: scale(1.15);
-}
-
-/* ------------------------------
-   FAQ Section
------------------------------- */
-.faq-item {
-  overflow: hidden;
-}
-
-.faq-question {
-  cursor: pointer;
-}
-
-.faq-answer {
-  max-height: 0;
-  opacity: 0;
-  transition: all 0.4s ease;
-}
-
-.faq-item.active .faq-answer {
-  max-height: 300px;
-  opacity: 1;
-}
-
-.faq-item.active .faq-question i {
-  transform: rotate(180deg);
-}
-
-/* ------------------------------
-   Back to Top Button
------------------------------- */
-#backToTop {
-  transition: all 0.4s ease, opacity 0.4s ease;
-}
-
-#backToTop.visible {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* ------------------------------
-   Scroll Animations
------------------------------- */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease-out;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ------------------------------
-   Responsive Tweaks
------------------------------- */
-@media (max-width: 768px) {
-  .cursor,
-  .cursor-follower {
-    display: none;
-  }
-
-  .nav-link::after {
-    display: none;
-  }
-
-  .feature-card {
-    text-align: center;
-  }
-}
-
-/* ------------------------------
-   Shadow Enhancements
------------------------------- */
-.shadow-3xl {
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-}
-
-/* ------------------------------
-   Smooth Fade-in for Sections
------------------------------- */
+/* Improve responsiveness */
 section {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 1s ease;
-}
-
-section.visible {
-  opacity: 1;
-  transform: translateY(0);
+  scroll-margin-top: 80px;
 }
